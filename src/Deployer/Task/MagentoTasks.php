@@ -183,14 +183,15 @@ class MagentoTasks extends TaskAbstract
     /**
      * Enable or Disable MagentoCache
      *
-     * @param $enabled
+     * @param        $enabled
+     * @param string $cacheType
      */
-    public static function activateMagentoCache($enabled)
+    public static function activateMagentoCache($enabled, $cacheType = '')
     {
         $cache = $enabled === true ? 'cache:enable' : 'cache:disable';
 
         \Deployer\cd('{{release_path_app}}');
-        \Deployer\run("php bin/magento $cache");
+        \Deployer\run("php bin/magento $cache $cacheType");
     }
 
     /**
