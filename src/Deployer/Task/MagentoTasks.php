@@ -24,6 +24,7 @@ class MagentoTasks extends TaskAbstract
     const TASK_CMS_DATA_IMPORT = 'magento:cms_data_import';
     const TASK_CACHE_ENABLE = 'magento:cache_enable';
     const TASK_CACHE_DISABLE = 'magento:cache_disable';
+    const TASK_CACHE_DISABLE_FULL_PAGE = 'magento:cache_disable_full_page';
     const TASK_CACHE_CLEAR = 'magento:cache_clear';
 
     public static function register()
@@ -72,6 +73,11 @@ class MagentoTasks extends TaskAbstract
         Deployer::task(
             MagentoTasks::TASK_CACHE_DISABLE, 'Disable Magento Cache',
             function () { MagentoTasks::activateMagentoCache(false); },
+            ['db']
+        );
+        Deployer::task(
+            MagentoTasks::TASK_CACHE_DISABLE_FULL_PAGE, 'Disable Magento Full Page Cache',
+            function () { MagentoTasks::activateMagentoCache(false, 'full_page'); },
             ['db']
         );
         Deployer::task(
